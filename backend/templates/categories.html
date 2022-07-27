@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block content_main %}
+    <style>
+        h1 { 
+            color: #000000; 
+            font-family: 'Raleway',sans-serif; 
+            font-size: 30px; 
+            font-weight: 800; 
+            line-height: 72px;
+            margin: 0 0 24px; 
+            text-align: left; 
+            margin-left: 00px;
+            text-transform: uppercase;
+        }
+        .header{
+            margin-left: 50px;
+        }
+        .skills{
+            margin-left: 50px;
+        }
+        .cuisines{
+            margin-left: 50px;
+        }
+        .by_tag{
+            margin-left: 50px;
+        }
+        {% comment %} make button look like a link {% endcomment %}
+        .cat_button { 
+            background: none!important;
+            border: none;
+            padding: 0!important;
+            /*optional*/
+            font-family: arial, sans-serif;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        span{
+            font-family: arial, sans-serif;
+        }
+    </style>
+    <div class = 'header'>
+        <h1>Welcome, explore categories here!</h1><br>
+    </div>
+    <div class = 'by_tag'>
+        <h3>Explore by Interests</h3>
+        <form style="position: relative; margin-left: 40px" action="http://127.0.0.1:8000/reccomendations/">
+            <label for="sk_tag">Choose skill tag:</label>
+            <select name="sk_tag" id="sk_tag">
+                {% comment %} <option value='Any'>Any</option> {% endcomment %}
+                {%for tag in s_tags%}
+                    <option value='{{tag}}'>{{tag}}</option>
+                {%endfor%}
+            </select>
+            <label for="c_tag">Choose cuisine tag:</label>
+            <select name="c_tag" id="c_tag">
+                {% comment %} <option value='Any'>Any</option> {% endcomment %}
+                {%for tag in c_tags%}
+                    <option value='{{tag}}'>{{tag}}</option>
+                {%endfor%}
+            </select>
+            <label for="d_tag">Choose difficulty:</label>
+            <select name="d_tag" id="d_tag">
+                <option value="{{1}}">Basic</option>
+                <option value="{{2}}">Simple</option>
+                <option value="{{3}}">Intermediate</option>
+                <option value="{{4}}">Difficult</option>
+                <option value="{{5}}">Advanced</option>
+            </select>
+            <label for="o_tag">Sort by views:</label>
+            <select name="o_tag" id="o_tag">
+                <option value="{{0}}">Sort by lowest</option>
+                <option value="{{1}}">Sort by highest</option>
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class = 'skills'>
+        <h3>Explore by Skills</h3>
+        <ul style="list-style-type:none">
+        {%for tag, desc in skills%}
+            <div class = 'aSkill'>
+                <form action = "http://127.0.0.1:8000/choose_category/">
+                    <button class = 'cat_button' type = 'submit' name = 'skill_kw' value = '{{tag}}'><b>{{tag}}</b></button><span>: {{desc}}</span>
+                </form>
+            </div>
+        {% endfor %}
+        </ul><br>
+    </div>
+    <div class = 'cuisines'>
+        <h3>Explore by Cuisines</h3>
+        <ul style="list-style-type:none">
+        {%for tag, desc in cuisines%}
+            <div class = 'aCuisine'>
+                <form action = "http://127.0.0.1:8000/choose_category/">
+                    <button class = 'cat_button' name = 'cuisine_kw' value = '{{tag}}'><b>{{tag}}</b></button><span>: {{desc}}</span>
+                </form>
+            </div>
+        {% endfor %}
+        </ul>
+    </div>
+    
+{%endblock%}

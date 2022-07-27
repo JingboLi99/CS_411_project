@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content_main %}
+    <style>
+        .skills{
+            margin-left: 50px;
+        }
+        .cuisines{
+            margin-left: 50px;
+        }
+        .by_tag{
+            margin-left: 50px;
+        }
+        .recs{
+            margin-left: 50px;
+        }
+        .main {
+            background-color: rgba(255, 0, 255, 0.0);
+            position: fixed;
+            left: 10px;
+            top: 70px;
+        }
+        .by_tag{
+            position: fixed;
+            left: 10px;
+            top: 70px;
+            width: calc(100% - 200px);
+            height: auto;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .recs{
+            position: fixed;
+            left: 10px;
+            top: 420px;
+            width: calc(100% - 200px);
+            height: auto;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .item {
+            background-color: rgba(255, 0, 0, 0.0);
+            display: inline-block;
+            padding-left: 00px;
+            padding-right: 40px;
+        }
+        .recipe_button { 
+            background: none!important;
+            border: none;
+            padding: 0!important;
+            /*optional*/
+            font-family: arial, sans-serif;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+    <div class = 'main'>
+        <div class = 'by_tag'>
+            <h2 style = "position: relative; margin-left: 40px">Based on your interests: </h2>
+            <ul>
+                {%for r in items%}
+                    <div class="item">
+                        <form action = "http://127.0.0.1:8000/recipe/">
+                            <button class = 'recipe_button' name = 'curr_rcp' value = '{{r.0}}'>
+                                <img src="{{r.1}}" alt="{{r.0}}" width="180" height="170">
+                                <p>{{r.0}}</p>
+                            </button>
+                        </form>
+                    </div>
+                    
+                {%endfor%}
+            </ul>
+        </div>
+        <div class = 'recs'>
+            <h2 style = "position: relative; margin-left: 40px">You may also like: </h2>
+            <ul>
+                {%for r in items2%}
+                    <div class="item">
+                        <form action = "http://127.0.0.1:8000/recipe/">
+                            <button class = 'recipe_button' name = 'curr_rcp' value = '{{r.0}}'>
+                                <img src="{{r.1}}" alt="{{r.0}}" width="180" height="170">
+                                <p>{{r.0}}</p>
+                            </button>
+                        </form>
+                    </div>
+                {%endfor%}
+            </ul>
+        </div>
+    </div>
+    
+{%endblock%}

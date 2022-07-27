@@ -1,0 +1,50 @@
+<head>
+    <style>
+        nav a{
+            float:right;
+            text-decoration:none;
+            color:#002e5b; 
+            font-size:18px; 
+            padding: 25px 35px; 
+            display:inline-block; 
+            transition: all 0.5s ease 0s;
+        }
+        header{
+            overflow:hidden;
+            background-color:#39D2D5; 
+            margin-bottom:50px;
+        }
+        body{
+            margin:0px; 
+            padding:0px; 
+            font-family: 'Open Sans', sans-serif;
+        }
+        nav{
+            margin-right:50px;
+        }
+        .searchbar {
+            float:left;
+            text-decoration:none;
+            color:#002e5b; 
+            font-size:18px; 
+            padding: 25px 50px; 
+            display:inline-block; 
+            transition: all 0.5s ease 0s;
+        }
+    </style>
+</head>
+<header>
+    <section>
+        <div class = 'searchbar'>
+            <form method='get' action = "{%url 'searchresult'%}" >
+                <input type='text' name='search', placeholder = 'Seach Recipes'>
+                <button type = 'submit'>Search</button>
+            </form>
+        </div>
+        <nav>
+            <a href="http://127.0.0.1:8000/profiles/?csrfmiddlewaretoken=CYQU4YnPiGaFa25JimLec2u9IEbHmbyCEyglk4aC0uxFH0eeKFYNcizl7Ccn47D3&user=User&psw=1">Profile</a>
+            <a href="http://127.0.0.1:8000/login/">Login</a>
+            <a href='http://127.0.0.1:8000/login/categories/?csrfmiddlewaretoken=091Y3T0DhoIO00Nfq3LhAy7EwWNwx61fiBuhNba8T1xxJOpqkKZXw445JNPG4iXI&user=User&psw=1'>Categories</a>
+        </nav>
+    </section>
+</header>

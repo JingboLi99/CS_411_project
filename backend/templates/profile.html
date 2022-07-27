@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content_main %}
+  <style>
+        h1 { 
+            color: #000000; 
+            font-family: 'Raleway',sans-serif; 
+            font-size: 45px; 
+            font-weight: 800; 
+            line-height: 72px;
+            margin: 0 0 24px; 
+            text-align: left; 
+            margin-left: 50px;
+            text-transform: uppercase; 
+        }
+        .settings_button{
+            font-family: 'Raleway',sans-serif; 
+            margin: 0 0 24px; 
+            text-align: left; 
+            margin-left: 50px;
+        }
+    </style>
+    <h1>Welcome {{user}}</h1><br>
+    <div class = 'settings_button'>
+        <form action="http://127.0.0.1:8000/updateuser/">
+            <input type="submit" value="User Settings" />
+        </form>
+    </div>
+{%endblock%}

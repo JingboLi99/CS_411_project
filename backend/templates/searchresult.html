@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content_main %}
+    <style>
+        .results{
+            margin-left: 50px;
+        }
+        .item {
+            background-color: rgba(255, 0, 0, 0.0);
+            display: inline-block;
+            padding-right: 40px;
+        }
+        .recipe_button { 
+            background: none!important;
+            border: none;
+            padding: 0!important;
+            /*optional*/
+            font-family: arial, sans-serif;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+    <div class = 'results'>
+        {% if results %}
+            <h3>Recipes containing {{query}}</h3><br>
+            <ul style="list-style-type:none">
+                {%for name, img in results%}
+                    <div class = 'item'>
+                        <form action = "http://127.0.0.1:8000/recipe/">
+                            <button class = 'recipe_button' name = 'curr_rcp' value = '{{name}}'>
+                                <img src="{{img}}" alt="{{name}}" width="180" height="170">
+                                <p>{{name}}</p>
+                            </button>
+                        </form>
+                    </div>
+                {%endfor%}
+            <ul>
+        {%else%}
+            <h3>No recipes containing  "{{query}}"</h3><br>
+        {% endif %}
+    </div>
+{%endblock%}

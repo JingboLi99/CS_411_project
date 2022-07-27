@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content_main %}
+    <style>
+        .main{
+            margin-left: 50px;
+        }
+    </style>
+    <div class ='main'>
+        {%if hasDeleted%}
+            <h3 style = 'color: #5DBB63'>Profile successfully deleted</h3>
+        {%else%}
+            {%if hasUpdated%}
+                <h3 style = 'color: #5DBB63'>Your password has been updated</h3>
+            {%else%}
+                <h1>Here to update user details: </h1>
+                {%if isError%}<p style = "color: red"><b>Either username or password is wrong</b></p>{%endif%}
+                <form method = "get" action = "http://127.0.0.1:8000/updateuserauth/">
+                    {% csrf_token %}
+                    <label for "user">Username</label>: 
+                    <input type="text" id="user" name="user"><br><br>
+                    <label for "oldpsw">Old Password</label>: 
+                    <input type="text" id="oldpsw" name="oldpsw"><br><br>
+                    <label for "newpsw">New Password</label>: 
+                    <input type="text" id="newpsw" name="newpsw"><br><br>
+                    <label for="toDel">Delete profile: </label>
+                    <input type="checkbox" id="toDel" name = "toDel"><br><br>
+                    <input type = "submit"/>
+                </form><br>
+            {%endif%}
+        {%endif%}
+    </div>
+{%endblock%}
