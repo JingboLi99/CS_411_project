@@ -1,6 +1,32 @@
 {% extends 'base.html' %}
 {% block content_main %}
-  <style>
+    <style>
+        {% comment %} .main {
+            background-color: rgba(255, 0, 255, 0.0);
+            position: fixed;
+            left: 10px;
+            top: 70px;
+        }{% endcomment %}
+        {% comment %} .todo{
+            position: fixed;
+            left: 10px;
+            top: 70px;
+            width: calc(100% - 200px);
+            height: auto;
+            overflow-x: auto;
+            white-space: nowrap;
+            margin-left: 50px;
+        }
+        .completed{
+            position: fixed;
+            left: 10px;
+            top: 420px;
+            width: calc(100% - 200px);
+            height: auto;
+            overflow-x: auto;
+            white-space: nowrap;
+            margin-left: 50px;
+        } {% endcomment %}
         h1 { 
             color: #000000; 
             font-family: 'Raleway',sans-serif; 
@@ -18,11 +44,95 @@
             text-align: left; 
             margin-left: 50px;
         }
+        .item {
+            background-color: rgba(255, 0, 0, 0.0);
+            display: inline-block;
+            padding-left: 40px;
+            padding-right: 0px;
+        }
+        .recipe_button { 
+            background: none!important;
+            border: none;
+            padding: 0!important;
+            /*optional*/
+            font-family: arial, sans-serif;
+            text-decoration: underline;
+            cursor: pointer;
+        } 
     </style>
-    <h1>Welcome {{user}}</h1><br>
-    <div class = 'settings_button'>
-        <form action="http://127.0.0.1:8000/updateuser/">
-            <input type="submit" value="User Settings" />
-        </form>
+    <div class = "main">
+        <h1>Welcome {{user}}</h1><br>
+        {%if noAcc%}
+            <h1>You don't seem to be signed in! Create an account for more exciting features</h1>
+        {%else%}
+            <div class = "user_rcps">
+                <div class = "todo">
+                    <h2 style = "position: relative; margin-left: 50px">Your saved recipes: </h2>
+                    {%if not empty_todo%}
+                        <ul>
+                            {%for r in todo%}
+                                <div class="item">
+                                    <form action = "http://127.0.0.1:8000/recipe/">
+                                        <button class = 'recipe_button' name = 'curr_rcp' value = '{{r.0}}'>
+                                            <img src="{{r.1}}" alt="{{r.0}}" width="180" height="170">
+                                            <p>{{r.0}}</p>
+                                        </button>
+                                    </form>
+                                </div>
+                                
+                            {%endfor%}
+                        </ul>
+                    {%else%}
+                        <h5>You do not have any saved recipes yet!</h5>
+                    {%endif%}
+                </div>
+                <div class = "completed">
+                    <h2 style = "position: relative; margin-left: 50px">Your completed recipes: </h2>
+                    {%if not empty_comp%}
+                        <ul>
+                            {%for r in completed%}
+                                <div class="item">
+                                    <form action = "http://127.0.0.1:8000/recipe/">
+                                        <button class = 'recipe_button' name = 'curr_rcp' value = '{{r.0}}'>
+                                            <img src="{{r.1}}" alt="{{r.0}}" width="180" height="170">
+                                            <p>{{r.0}}</p>
+                                        </button>
+                                    </form>
+                                </div>
+                                
+                            {%endfor%}
+                        </ul>
+                    {%else%}
+                        <h5>You do not have any completed recipes yet!</h5>
+                    {%endif%}
+                </div>
+                <div class = "rec">
+                    <h2 style = "position: relative; margin-left: 50px">You may also like these recipes: </h2>
+                    {%if not empty_comp%}
+                        <ul>
+                            {%for r in rec%}
+                                <div class="item">
+                                    <form action = "http://127.0.0.1:8000/recipe/">
+                                        <button class = 'recipe_button' name = 'curr_rcp' value = '{{r.0}}'>
+                                            <img src="{{r.1}}" alt="{{r.0}}" width="180" height="170">
+                                            <p>{{r.0}}</p>
+                                        </button>
+                                    </form>
+                                </div>
+                                
+                            {%endfor%}
+                        </ul>
+                    {%else%}
+                        <h5>Complete recipes to receive reccomendations</h5>
+                    {%endif%}
+                </div>
+            </div>
+        {%endif%}
+        
+        <div class = 'settings_button'>
+            <form action="http://127.0.0.1:8000/updateuser/">
+                <input type="submit" value="User Settings" />
+            </form>
+        </div>
     </div>
 {%endblock%}

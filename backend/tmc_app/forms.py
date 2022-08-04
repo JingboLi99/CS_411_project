@@ -7,5 +7,6 @@ class UserForm(forms.ModelForm):
         fields = [
             'username',
             'psw',
-            'email'
+            'email',
+            'skill_lvl'
         ]

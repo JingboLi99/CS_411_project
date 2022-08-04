@@ -15,5 +15,6 @@ urlpatterns = [
     path('updateuserauth/', views.update_user_auth_view, name = 'updateuserauth'),
     path('reccomendations/', views.recs_view, name = 'reccomendations'),
     path('choose_category/', views.choose_category_view, name = 'choose_category'),
-    path('recipe/', views.recipe_view, name = 'recipe')
+    path('recipe/', views.recipe_view, name = 'recipe'),
+    path('saverecipe/', views.save_recipes_view, name = 'saverecipe')
 ]

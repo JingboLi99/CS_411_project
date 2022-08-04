@@ -74,8 +74,18 @@ class Users(models.Model):
     username = models.CharField(primary_key = True, max_length =50)
     psw = models.CharField(max_length = 50, null = False)
     email = models.CharField(max_length=200)
+    skill_lvl = models.FloatField(null=True)
     
     class Meta:
         managed = False
         db_table = 'Users'
     
+class User_recipes(models.Model):
+    user = models.OneToOneField('Users', models.DO_NOTHING, db_column='username', primary_key = True)
+    recipe = models.ForeignKey('Recipes', models.DO_NOTHING, db_column='name')
+    is_todo = models.BooleanField(default=False)
+
+    class Meta:
+        managed = False
+        db_table = 'User_Recipes'
+        unique_together = (('user', 'recipe'),)
